@@ -87,3 +87,7 @@ export function deleteData({ commit }, id) {
       throw error;
     });
 }
+
+export function drawerStatusChange({ commit }) {
+  return commit('DRAWER_STATUS_CHANGED')
+}

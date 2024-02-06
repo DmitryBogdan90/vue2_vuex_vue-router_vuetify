@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {
   deleteData,
+  drawerStatusChange,
   getData,
   getDataByFilter,
   getDataById,
@@ -21,6 +22,7 @@ export default new Vuex.Store({
       patchId: null,
       putId: null,
       deleteId: null,
+      isDrawerOpen: false,
     },
     mutations: {
       SET_DATA(state, data) {
@@ -38,6 +40,9 @@ export default new Vuex.Store({
       DELETE_SUCCESS(state, data) {
         state.deleteId = data;
       },
+      DRAWER_STATUS_CHANGED(state) {
+        state.isDrawerOpen = !state.isDrawerOpen;
+      },
     },
     actions: {
       getData,
@@ -48,6 +53,7 @@ export default new Vuex.Store({
       patchData,
       putData,
       deleteData,
+      drawerStatusChange,
     },
   },
 );
