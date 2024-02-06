@@ -1,34 +1,27 @@
 <template>
-  <v-container>
-    <v-col>
-      <v-row class="d-flex justify-center">{{ this.header }}</v-row>
-      <v-col>
-        <p v-if="data">{{ data }}</p>
-      </v-col>
-    </v-col>
-  </v-container>
+  <MemberListComponent />
 </template>
 
 <script>
+import MemberListComponent from '@/components/MemberListComponent.vue';
 
 export default {
   name: 'MemberList',
-  computed: {
-    header() {
-      return 'Member List';
-    },
-    data() {
-      return this.$store.state.data;
-    },
+  components: {
+    MemberListComponent,
   },
   created() {
-    this.$store.dispatch('getData')
-      .then(() => {
-        console.log('Data fetched successfully!');
-      })
-      .catch((error) => {
-        console.error('Error fetching data in component:', error);
-      });
+    this.$store.dispatch('getData');
   },
 };
 </script>
+
+<style>
+.v-data-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1; /* Ensure pagination controls appear above other content */
+  background: white;
+}
+</style>

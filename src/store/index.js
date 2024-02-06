@@ -12,12 +12,11 @@ import {
   putData,
 } from '@/store/actions';
 
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-      data: null,
+      memberList: [],
       postId: null,
       patchId: null,
       putId: null,
@@ -26,7 +25,7 @@ export default new Vuex.Store({
     },
     mutations: {
       SET_DATA(state, data) {
-        state.data = data;
+        state.memberList = data;
       },
       POST_SUCCESS(state, data) {
         state.postId = data;
