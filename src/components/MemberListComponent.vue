@@ -20,13 +20,20 @@
 </template>
 
 <script>
-import { COLUMN_LIST } from '@/utils/variables';
+import { COLUMN_LIST, MEMBER_STATUS } from '@/utils/variables';
 
 export default {
   name: 'MemberListComponent',
   computed: {
     memberList() {
-      return this.$store.state.memberList;
+      switch (this.$store.state.memberStatus) {
+        case MEMBER_STATUS.CHECKED:
+          return  this.$store.state.memberList.filter(member => member.status);
+        case MEMBER_STATUS.UNCHECKED:
+          return this.$store.state.memberList.filter(member => !member.status);
+        default:
+          return this.$store.state.memberList
+      }
     },
     columnList() {
       return COLUMN_LIST;

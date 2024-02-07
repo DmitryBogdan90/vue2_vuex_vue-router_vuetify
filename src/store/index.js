@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {
   deleteData,
-  drawerStatusChange,
+  changeDrawerStatus,
+  changeMemberStatus,
   getData,
   getDataByFilter,
   getDataById,
@@ -11,6 +12,7 @@ import {
   postData,
   putData,
 } from '@/store/actions';
+import { MEMBER_STATUS } from '@/utils/variables';
 
 Vue.use(Vuex);
 
@@ -22,6 +24,7 @@ export default new Vuex.Store({
       putId: null,
       deleteId: null,
       isDrawerOpen: false,
+      memberStatus: MEMBER_STATUS.ALL,
     },
     mutations: {
       SET_DATA(state, data) {
@@ -39,8 +42,11 @@ export default new Vuex.Store({
       DELETE_SUCCESS(state, data) {
         state.deleteId = data;
       },
-      DRAWER_STATUS_CHANGED(state) {
+      CHANGE_DRAWER_STATUS(state) {
         state.isDrawerOpen = !state.isDrawerOpen;
+      },
+      CHANGE_MEMBER_STATUS(state, status) {
+        state.memberStatus = status;
       },
     },
     actions: {
@@ -52,7 +58,8 @@ export default new Vuex.Store({
       patchData,
       putData,
       deleteData,
-      drawerStatusChange,
+      changeDrawerStatus,
+      changeMemberStatus,
     },
   },
 );

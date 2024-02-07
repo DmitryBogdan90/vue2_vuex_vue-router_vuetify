@@ -13,7 +13,7 @@ export default {
   name: 'HeaderComponent',
   methods: {
     handleBurger() {
-      this.$store.dispatch('drawerStatusChange');
+      this.$store.dispatch('changeDrawerStatus');
     },
   },
 };

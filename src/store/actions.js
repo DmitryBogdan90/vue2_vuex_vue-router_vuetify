@@ -50,7 +50,7 @@ export function postData({ commit }, memberConfig) {
       commit('POST_SUCCESS', response.data);
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error posting data:', error);
       throw error;
     });
 }
@@ -61,7 +61,7 @@ export function patchData({ commit }, [id, memberConfig]) {
       commit('PATCH_SUCCESS', response.data);
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error patching data:', error);
       throw error;
     });
 }
@@ -72,7 +72,7 @@ export function putData({ commit }, [id, memberConfig]) {
       commit('PUT_SUCCESS', response.data);
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error putting data:', error);
       throw error;
     });
 }
@@ -83,11 +83,15 @@ export function deleteData({ commit }, id) {
       commit('DELETE_SUCCESS', response.data);
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error deleting data:', error);
       throw error;
     });
 }
 
-export function drawerStatusChange({ commit }) {
-  return commit('DRAWER_STATUS_CHANGED')
+export function changeDrawerStatus({ commit }) {
+  return commit('CHANGE_DRAWER_STATUS');
+}
+
+export function changeMemberStatus({ commit }, status) {
+  return commit('CHANGE_MEMBER_STATUS', status);
 }
