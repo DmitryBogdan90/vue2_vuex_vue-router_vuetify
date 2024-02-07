@@ -4,17 +4,26 @@
     :items="memberList"
     item-key="id"
   >
-    <template v-slot:member="props">
-      <tr>
-        <td>{{ props.member.status }}</td>
-        <td>{{ props.member.firstName }}</td>
-        <td>{{ props.member.lastName }}</td>
-        <td>{{ props.member.company }}</td>
-        <td>{{ props.member.job }}</td>
-        <td>{{ props.member.phone }}</td>
-        <td>{{ props.member.email }}</td>
-        <td>{{ props.member.hobby }}</td>
+    <template v-slot:body="{ items }">
+      <tbody>
+      <tr v-for="item in items"
+          :key="item.id"
+          @click="handleRowClick(item)"
+          :class="{ 'highlighted-row': isFocusedMember(item.id) }">
+        <td>
+          <v-icon>
+            {{ item.status ? 'mdi-cloud-check' : 'mdi-cloud-alert' }}
+          </v-icon>
+        </td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.company }}</td>
+        <td>{{ item.job }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.hobby }}</td>
       </tr>
+      </tbody>
     </template>
   </v-data-table>
 </template>
@@ -39,5 +48,19 @@ export default {
       return COLUMN_LIST;
     },
   },
+  methods: {
+    handleRowClick(item) {
+      this.$store.dispatch('focusMember', item.id)
+    },
+    isFocusedMember(id) {
+      return this.$store.state.focusedMember === id;
+    }
+  }
 };
 </script>
+
+<style>
+.highlighted-row {
+  background-color: lightgray;
+}
+</style>

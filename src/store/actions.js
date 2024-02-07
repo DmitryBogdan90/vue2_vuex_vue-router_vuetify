@@ -95,3 +95,7 @@ export function changeDrawerStatus({ commit }) {
 export function changeMemberStatus({ commit }, status) {
   return commit('CHANGE_MEMBER_STATUS', status);
 }
+
+export function focusMember({commit}, id) {
+  return commit('FOCUS_MEMBER', id)
+}

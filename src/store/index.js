@@ -11,6 +11,7 @@ import {
   patchData,
   postData,
   putData,
+  focusMember,
 } from '@/store/actions';
 import { MEMBER_STATUS } from '@/utils/variables';
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
       deleteId: null,
       isDrawerOpen: false,
       memberStatus: MEMBER_STATUS.ALL,
+      focusedMember: null,
     },
     mutations: {
       SET_DATA(state, data) {
@@ -48,6 +50,9 @@ export default new Vuex.Store({
       CHANGE_MEMBER_STATUS(state, status) {
         state.memberStatus = status;
       },
+      FOCUS_MEMBER(state, id) {
+        state.focusedMember = id;
+      },
     },
     actions: {
       getData,
@@ -60,6 +65,7 @@ export default new Vuex.Store({
       deleteData,
       changeDrawerStatus,
       changeMemberStatus,
+      focusMember
     },
   },
 );
