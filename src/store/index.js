@@ -13,7 +13,7 @@ import {
   putData,
   focusMember,
 } from '@/store/actions';
-import { MEMBER_STATUS } from '@/utils/variables';
+import { MEMBER_STATUS } from '@/global/variables';
 
 Vue.use(Vuex);
 

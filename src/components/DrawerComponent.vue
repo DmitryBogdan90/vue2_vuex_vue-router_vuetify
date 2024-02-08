@@ -23,8 +23,7 @@
 </template>
 
 <script>
-
-import { MEMBER_STATUS_MENU } from '@/utils/variables';
+import { MEMBER_STATUS_MENU } from '@/global/variables';
 
 export default {
   name: 'DrawerComponent',

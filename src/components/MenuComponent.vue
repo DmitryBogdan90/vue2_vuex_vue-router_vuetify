@@ -18,6 +18,9 @@
       </template>
 
       <v-list>
+        <v-list-item @click="handleAction('search')">
+          <v-list-item-title>Поиск</v-list-item-title>
+        </v-list-item>
         <v-list-item @click="handleAction('create')">
           <v-list-item-title>Добавить</v-list-item-title>
         </v-list-item>
@@ -69,11 +72,32 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-dialog v-model="searchModalOpen">
+      <template v-slot:activator="{ on }"></template>
+      <v-card>
+        <v-card-title>Search User</v-card-title>
+        <v-card-text>
+          <v-text-field v-model="searchedUser.firstName" label="First Name"></v-text-field>
+          <v-text-field v-model="searchedUser.lastName" label="Last Name"></v-text-field>
+          <v-text-field v-model="searchedUser.company" label="Company"></v-text-field>
+          <v-text-field v-model="searchedUser.job" label="Job"></v-text-field>
+          <v-text-field v-model="searchedUser.phone" label="Phone"></v-text-field>
+          <v-text-field v-model="searchedUser.email" label="Email"></v-text-field>
+          <v-text-field v-model="searchedUser.hobby" label="Hobby"></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="blue darken-1" text @click="closeSearchModal">Cancel</v-btn>
+          <v-btn color="blue darken-1" text @click="searchUser">Search</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-toolbar>
 </template>
 
 <script>
 export default {
+  name: 'MenuComponent',
   computed: {
     statusMember() {
       return this.$store.state.memberStatus;
@@ -89,6 +113,7 @@ export default {
     return {
       createModalOpen: false,
       patchModalOpen: false,
+      searchModalOpen: false,
       newUser: {
         firstName: '',
         lastName: '',
@@ -99,6 +124,15 @@ export default {
         hobby: '',
       },
       editedUser: {
+        firstName: '',
+        lastName: '',
+        company: '',
+        job: '',
+        phone: '',
+        email: '',
+        hobby: '',
+      },
+      searchedUser: {
         firstName: '',
         lastName: '',
         company: '',
@@ -124,6 +158,9 @@ export default {
           if (this.focusedUserId) {
             this.$store.dispatch('deleteData', this.focusedUserId);
           }
+          break;
+        case 'search':
+          this.openSearchModal();
           break;
         default:
           break;
@@ -152,6 +189,17 @@ export default {
     patchUser() {
       this.$store.dispatch('patchData', [this.focusedUserId, this.editedUser]);
       this.patchModalOpen = false;
+    },
+    openSearchModal() {
+      this.searchedUser = {};
+      this.searchModalOpen = true;
+    },
+    closeSearchModal() {
+      this.searchModalOpen = false;
+    },
+    searchUser() {
+      this.$store.dispatch('getDataByFilter', this.searchedUser);
+      this.searchModalOpen = false;
     },
     updateMemberList() {
       this.$store.dispatch('getData');

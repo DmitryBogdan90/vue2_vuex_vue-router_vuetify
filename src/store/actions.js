@@ -1,4 +1,5 @@
-import { httpService } from '@/utils/http-service';
+import { httpService } from '@/global/http-service';
+import { removeEmptyKeys } from '@/global/utils';
 
 export function getData({ commit }) {
   return httpService.getData()
@@ -23,7 +24,7 @@ export function getDataById({ commit }, id) {
 }
 
 export function getDataByFilter({ commit }, memberConfig) {
-  return httpService.getDataByFilter(memberConfig)
+  return httpService.getDataByFilter(removeEmptyKeys(memberConfig))
     .then(response => {
       commit('SET_DATA', response.data);
     })
@@ -96,6 +97,6 @@ export function changeMemberStatus({ commit }, status) {
   return commit('CHANGE_MEMBER_STATUS', status);
 }
 
-export function focusMember({commit}, id) {
-  return commit('FOCUS_MEMBER', id)
+export function focusMember({ commit }, id) {
+  return commit('FOCUS_MEMBER', id);
 }

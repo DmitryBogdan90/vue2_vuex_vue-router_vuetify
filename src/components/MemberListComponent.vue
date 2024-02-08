@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { COLUMN_LIST, MEMBER_STATUS } from '@/utils/variables';
+import { COLUMN_LIST, MEMBER_STATUS } from '@/global/variables';
 
 export default {
   name: 'MemberListComponent',
