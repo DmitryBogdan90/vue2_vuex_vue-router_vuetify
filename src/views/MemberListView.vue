@@ -1,14 +1,19 @@
 <template>
-  <MemberListComponent />
+  <v-col>
+    <MenuComponent />
+    <MemberListComponent />
+  </v-col>
 </template>
 
 <script>
 import MemberListComponent from '@/components/MemberListComponent.vue';
+import MenuComponent from '@/components/MenuComponent.vue';
 
 export default {
   name: 'MemberList',
   components: {
     MemberListComponent,
+    MenuComponent,
   },
   created() {
     this.$store.dispatch('getData');
@@ -21,7 +26,7 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 1; /* Ensure pagination controls appear above other content */
+  z-index: 1;
   background: white;
 }
 </style>
